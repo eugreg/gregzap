@@ -13,12 +13,17 @@ import flet as ft
 def main(pagina):
     titulo = ft.Text("GregZap")
     nome_usuario = ft.TextField(label="Escreva seu nome")
+    campo_mensagem = ft.TextField(label="Digite uma mensagem")
+    botao_enviar = ft.ElevatedButton("Enviar")
 
 
     def entrar_popup(evento):
-        popup.open = True
-        pagina.romove(botao_iniciar)
+        popup.open = False
+        pagina.remove(botao_iniciar)
+        pagina.add(campo_mensagem)
+        pagina.add(botao_enviar)
         pagina.update()
+        
 
     popup = ft.AlertDialog(title=ft.Text("Digite seu nome"), content=nome_usuario,  actions=[ft.ElevatedButton("Entrar", on_click=entrar_popup)], open=False, )
 
