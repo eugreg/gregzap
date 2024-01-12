@@ -11,19 +11,27 @@
 import flet as ft
 
 def main(pagina):
-    titulo = ft.Text("GregZap", size=30, bold=True, color=ft.colors.BLUE_500)
-    botao_iniciar = ft.ElevatedButton("Iniciar chat", on_click=entrar_popup)
+    titulo = ft.Text("GregZap")
+    nome_usuario = ft.TextField(label="Escreva seu nome")
+
 
     def entrar_popup(evento):
-        pagina.add(chat)
-        popup.open = False
-        pagina.remove(botao_iniciar)
-        pagina.remove(titulo)
+        popup.open = True
+        pagina.romove(botao_iniciar)
         pagina.update()
 
+    popup = ft.AlertDialog(title=ft.Text("Digite seu nome"), content=nome_usuario,  actions=[ft.ElevatedButton("Entrar", on_click=entrar_popup)], open=False, )
+
+    def entrar_chat(evento):
+        popup.open = True
+        pagina.dialog = popup
+        pagina.update()
+
+    botao_iniciar = ft.ElevatedButton("Iniciar chat", on_click=entrar_chat)
 
 
     pagina.add(titulo)
+    pagina.add(botao_iniciar)
 
 
 ft.app(main)
