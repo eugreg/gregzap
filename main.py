@@ -20,8 +20,10 @@ def main(pagina):
     def entrar_popup(evento):
         popup.open = False
         pagina.remove(botao_iniciar)
-        pagina.add(campo_mensagem)
-        pagina.add(botao_enviar)
+        linha = ft.Row(
+            [campo_mensagem, botao_enviar]
+        )
+        pagina.add(linha)
         pagina.update()
         
 
