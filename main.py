@@ -16,10 +16,15 @@ def main(pagina):
     campo_mensagem = ft.TextField(label="Digite uma mensagem")
     chat = ft.Column()
 
+    def tunel_mensagem(mensagem):
+        chat.controls.append(ft.Text(mensagem))
+        pagina.update()
 
+    pagina.pubsub.subscribe(tunel_mensagem)
 
     def enviar_mensagem(evento):
-        chat.controls.append(ft.Text(f"{nome_usuario.value}: { campo_mensagem.value}"))
+        texto = f'{nome_usuario.value}: {campo_mensagem.value}'
+        pagina.pubsub.send_all(texto)
         # limpar o campo de mensagem
         campo_mensagem.value = ""
         pagina.update()
@@ -51,4 +56,5 @@ def main(pagina):
     pagina.add(botao_iniciar)
 
 
-ft.app(main)
+ft.app(target=main, view=ft.WEB_BROWSER, port=8000)
+# ft.app(main)
